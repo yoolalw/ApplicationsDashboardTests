@@ -10,6 +10,7 @@
     "dev": "tsx server.ts",
     "desktop": "npm run build && electron .",
     "build": "vite build && esbuild server.ts --bundle --platform=node --format=cjs --external:vite --sourcemap --outfile=dist/server.cjs",
+    "package": "node scripts/package.cjs",
     "package:win": "node scripts/package-portable.cjs",
     "package:win:full": "npm run build && node scripts/package-portable.cjs",
     "package:win:zip": "npm run package:win:full && powershell -NoProfile -Command \"Compress-Archive -Path release/APPDashboard/* -DestinationPath release/APPDashboard-windows-portable.zip -Force\"",

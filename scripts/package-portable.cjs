@@ -39,7 +39,15 @@ function copyDir(source, target) {
 }
 
 function removeDir(target) {
-  fs.rmSync(target, { recursive: true, force: true });
+  if (!fs.existsSync(target)) return;
+  for (let attempt = 0; attempt < 5; attempt++) {
+    try {
+      fs.rmSync(target, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 });
+      if (!fs.existsSync(target)) return;
+    } catch {}
+    const stop = Date.now() + 200;
+    while (Date.now() < stop) {}
+  }
 }
 
 function copyFile(source, target) {
@@ -188,6 +196,25 @@ if (fs.existsSync(electronExe)) {
 }
 applyExecutableIcon(appExe, ensureIcon());
 
+function fixTimestamps(dir) {
+  if (!fs.existsSync(dir)) return;
+  const now = new Date();
+  const minDate = new Date('1980-01-02T00:00:00Z');
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      fixTimestamps(fullPath);
+    } else {
+      try {
+        const stat = fs.statSync(fullPath);
+        if (stat.mtime < minDate) {
+          fs.utimesSync(fullPath, now, now);
+        }
+      } catch {}
+    }
+  }
+}
+
 removeDir(path.join(releaseDir, 'resources', 'default_app.asar'));
 copyDir(path.join(root, 'dist'), path.join(appDir, 'dist'));
 copyDir(path.join(root, 'electron'), path.join(appDir, 'electron'));
@@ -195,6 +222,7 @@ copyFile(path.join(root, 'apps.json'), path.join(appDir, 'apps.json'));
 copyFile(path.join(root, 'patch-notes.json'), path.join(appDir, 'patch-notes.json'));
 copyFile(path.join(root, 'PROJECT_PATCH_SUMMARY.md'), path.join(appDir, 'PROJECT_PATCH_SUMMARY.md'));
 copyFile(path.join(root, 'package.json'), path.join(appDir, 'package.json'));
+fixTimestamps(releaseDir);
 
 console.log(`Aplicativo portatil criado em: ${releaseDir}`);
 console.log(`Execute: ${appExe}`);

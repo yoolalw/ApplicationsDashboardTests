@@ -74,50 +74,64 @@ Output folder: `dist/mac/Applications Dashboard.app`. The app is unsigned (`iden
 npm run package:all
 ```
 
-### GitHub Actions
+### One-shot Windows + Linux from the same host
 
-For a fully automated three-platform release, use one job per OS runner (`windows-latest`, `ubuntu-latest`, `macos-latest`). Each job runs `npm ci` then its respective `package:*` script and uploads the artifact.
-
-## 4. Test the Portable App
-
-Open:
-
-```text
-release/APPDashboard/APPDashboard.exe
+```bash
+npm run package
 ```
 
-Check:
+Runs the build once, then produces the Windows portable + ZIP and the Linux `tar.gz` in a single command (macOS still needs its own runner).
+
+### GitHub Actions
+
+`.github/workflows/release.yml` runs one job per OS (`windows-latest`, `ubuntu-latest`, `macos-latest`), each calling `npm ci` and its respective `package:*` script, and uploads the artifacts. Trigger it manually from the Actions tab, passing the tag as input.
+
+## 4. Test the Packaged Apps
+
+### Windows
+
+Open `release/APPDashboard/APPDashboard.exe` and check:
 
 - Window opens.
 - Application icon is correct. The packaging script embeds it from `public/ind40-logo.png`; the build also requires the Electron binary in `node_modules/electron/dist`.
 - Dashboard loads.
 - Local API responds at `http://127.0.0.1:3764/api/apps`.
 - Patch notes report the expected version.
-- Settings opens.
-- Language selector works.
-- A test instance can be started and stopped.
+- Settings opens, language selector works, a test instance starts and stops.
+
+### Linux
+
+Extract the tarball and run:
+
+```bash
+tar -xzf dist/APPDashboard-linux-x64.tar.gz
+cd APPDashboard-linux-x64
+./application-dashboard
+```
+
+### macOS
+
+Open `dist/mac/Applications Dashboard.app`. Right-click → **Open** on the first launch to accept the unsigned bundle.
 
 ## 5. Publish on GitHub
 
-On GitHub:
-
 1. Open **Releases**.
 2. Draft a new release.
-3. Create a tag such as `v2.5.0`.
-4. Attach `APPDashboard-windows-portable.zip`.
+3. Create a tag such as `v3.0.0`.
+4. Attach every platform artifact: `APPDashboard-windows-portable.zip`, `APPDashboard-linux-x64.tar.gz`, and the macOS `.app` (or a zipped copy).
 5. Add a short summary from `patch-notes.json`.
 
 Suggested release text:
 
 ```text
-Download APPDashboard-windows-portable.zip, extract the folder, and run APPDashboard.exe.
+Download the archive for your platform and extract it. On Windows, run APPDashboard.exe inside the extracted folder. On Linux, run ./application-dashboard. On macOS, drag the .app to Applications; right-click → Open on first launch.
 
 Node.js and the source code are not required to use this release version.
 ```
 
 ## Important
 
-Do not publish only `APPDashboard.exe`. Electron needs the support files in the portable folder.
+Do not publish only the Windows `.exe`. Electron needs the support files in the portable folder.
 
 Do not commit generated folders:
 

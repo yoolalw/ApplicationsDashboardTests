@@ -61,3 +61,24 @@ The current i18n verification checks:
 ## System Logs
 
 System logs are intentionally stored and exported in English, regardless of the selected interface language. This keeps CSV, TXT, JSON, NDJSON, and LOG exports consistent for support and auditing.
+
+## Namespaced UI Blocks
+
+Interface text is grouped by page/feature in `src/i18n.ts`. When adding a new page or feature, add a matching namespace so translations stay organised:
+
+| Namespace | Covers |
+| --- | --- |
+| `nav` | Sidebar and top-bar entries. |
+| `form` | Instance create/edit form labels. |
+| `settings` | Every tab and section in Settings. |
+| `patches` | Patch Files page. |
+| `about` | About system page. |
+| `ai` | AI Chat page. |
+| `apiTester` | API Tester page. |
+| `connectivity` | Tests and Connectivity page. |
+| `webServer` | Mini web server page. |
+| `scripts` | Scripts runner page. |
+| `alerts` | Alert Center page. |
+| `logMenu` | Terminal three-dot menu on the log panel. |
+
+Every namespace must be present for all six supported languages — TypeScript widens the `Translation` type from the English tree, so a missing key in another language surfaces at compile time as soon as it is used.

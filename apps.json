@@ -7,5 +7,26 @@
     "port": "",
     "cwd": "",
     "shell": true
+  },
+  {
+    "id": "0dee21c2-e04e-41b1-8655-6ebb5f365c33",
+    "name": "ApiForTests",
+    "command": "mvn",
+    "args": "spring-boot:run",
+    "port": "8080",
+    "cwd": "C:\\Blooms\\BloomsKimono\\jvApi",
+    "webLink": "",
+    "useInternalFolder": false,
+    "internalFolder": "",
+    "autoStart": false,
+    "dependsOn": [],
+    "shell": true,
+    "advancedEnabled": false,
+    "alternatePorts": [],
+    "secondaryCwd": "",
+    "advancedCommand": "",
+    "advancedArgs": "",
+    "advancedShell": true,
+    "enabled": true
   }
 ]

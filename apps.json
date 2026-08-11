@@ -6,7 +6,8 @@
     "args": "8.8.8.8 -t",
     "port": "",
     "cwd": "",
-    "shell": true
+    "shell": true,
+    "enabled": true
   },
   {
     "id": "0dee21c2-e04e-41b1-8655-6ebb5f365c33",

@@ -77,12 +77,12 @@ class HomePage:
         self.driver.find_element(*self.new_application).click()
         return self.wait.until(ec.visibility_of_element_located(self.container_title_new_app)).is_displayed()
 
-    def creating_application_with_web_link(self, input_name, input_port, input_web_link):
+    def creating_new_application(self, input_name, input_port, input_directory, input_cmd, input_arguments):
         self.wait.until(ec.visibility_of_element_located(self.container_input_name_new_app)).send_keys(input_name)
         self.wait.until(ec.visibility_of_element_located(self.container_input_port_new_app)).send_keys(input_port)
-        self.wait.until(ec.visibility_of_element_located(self.container_input_web_link_new_app)).send_keys(input_web_link)
+        self.wait.until(ec.visibility_of_element_located(self.container_input_directory_new_app)).send_keys(input_directory)
+        self.wait.until(ec.visibility_of_element_located(self.container_input_command_new_app)).send_keys(input_cmd)
+        self.wait.until(ec.visibility_of_element_located(self.container_input_arguments_new_app)).send_keys(input_arguments)
 
     def clicking_in_add_app(self):
         self.wait.until(ec.visibility_of_element_located(self.container_button_add_app_new_app)).click()
-
-

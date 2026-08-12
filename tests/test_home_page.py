@@ -40,7 +40,7 @@ class TestHomePage:
     def test_clicking_in_new_app_button(self):
         assert self.home_page.clicking_in_new_application()
 
-    # PDT07
+    # PDT07 + PDT08
     @pytest.mark.parametrize(
         "name, port, directory, cmd, arguments",
         [
@@ -70,3 +70,16 @@ class TestHomePage:
         self.home_page.clicking_in_add_app()
         sleep(2)
         assert expected in self.home_page.verification_message_input_name() or self.home_page.verification_message_input_cmd()
+
+    def test_starting_application_and_verifying_if_status_change(self):
+        self.home_page.starting_application_ping_teste_internet()
+        assert 'running' in self.home_page.status_application_ping_teste_internet()
+
+    def test_creating_new_configuration_in_application(self):
+        self.home_page.click_in_configuration_button_ping_teste_internet()
+        self.home_page.inserting_new_configuration_to_ping_server_internet('New name', 'ping','8.8.8.8 -t')
+        self.home_page.click_to_save_new_configuration()
+        assert 'New name' in self.home_page.title_ping_teste_internet()
+
+        self.home_page.starting_application_ping_teste_internet()
+        assert 'running' in self.home_page.status_application_ping_teste_internet()

@@ -22,15 +22,16 @@ class HomePage:
 
         # These XPATH are for the 'Ping Test Internet' instance. The execution begins with the JSON file.
         self.title_container = (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[1]/div[1]/h3')
-        self.status_container = (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[1]/div[1]/div/span[2]')
-        self.status_container_color = (By.XPATH,
-                                       '//*[@id="root"]/div/main/section/div/div[2]/article[1]/div[1]/div/span[1]')
         self.start_button = (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[1]/div[2]/div[2]/button[1]')
         self.config_button = (By.XPATH,
                               '//*[@id="root"]/div/main/section/div/div[2]/article[1]/div[2]/div[2]/button[2]')
+
+        self.status_button = (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[1]/div[1]/div/span[2]')
+
         self.container_languages = (By.XPATH, '//*[@id="root"]/div/header/div[2]/div/div/button')
         self.pt_language = (By.XPATH, '//*[@id="root"]/div/header/div[2]/div/div/button[1]')
 
+        # To create new applications !
         self.container_title_new_app = (By.XPATH, '//*[@id="root"]/div/main/section/div[2]/aside/div/h2')
         self.container_input_name_new_app = (By.XPATH,
                                              '/html/body/div/div/main/section/div[2]/aside/form/div[1]/section[1]/div/label[1]/input')
@@ -49,7 +50,18 @@ class HomePage:
         self.container_button_cancel_new_app = (By.XPATH,
                                                 '//*[@id="root"]/div/main/section/div[2]/aside/form/div[2]/button[1]')
 
-        self.container_input_xpath = (By.XPATH, '//input')
+        # To insert new configuration in 'Ping Teste Internet'
+        self.config_input_name = (By.XPATH,
+                                  '//*[@id="root"]/div/main/section/div[2]/aside/form/div[1]/section[1]/div/label[1]/input')
+        self.config_input_port = (By.XPATH,
+                                  '//*[@id="root"]/div/main/section/div[2]/aside/form/div[1]/section/div/div/label[1]/input')
+        self.config_input_directory = (By.XPATH,
+                                       '//*[@id="root"]/div/main/section/div[2]/aside/form/div[1]/section/div/div/label[2]/input')
+        self.config_input_command = (By.XPATH,
+                                     '//*[@id="root"]/div/main/section/div[2]/aside/form/div[1]/section/div/label[3]/input')
+        self.config_input_arguments = (By.XPATH,
+                                       '//*[@id="root"]/div/main/section/div[2]/aside/form/div[1]/section/div/label[4]/input')
+        self.config_add_app_button = (By.XPATH, '//*[@id="root"]/div/main/section/div[2]/aside/form/div[2]/button[2]')
 
     @allure.step('Verifying fixed elements on the screen')
     def verifying_if_the_elements_are_displayed(self):
@@ -106,3 +118,30 @@ class HomePage:
     def verification_message_input_cmd(self):
         return self.wait.until(ec.visibility_of_element_located(self.container_input_command_new_app)).get_attribute(
             'validationMessage')
+
+    def starting_application_ping_teste_internet(self):
+        self.wait.until(ec.visibility_of_element_located(self.start_button)).click()
+
+    def status_application_ping_teste_internet(self):
+        return self.wait.until(ec.visibility_of_element_located(self.status_button)).text
+
+    def click_in_configuration_button_ping_teste_internet(self):
+        self.wait.until(ec.visibility_of_element_located(self.config_button)).click()
+
+    def inserting_new_configuration_to_ping_server_internet(self, name, command, arguments):
+        name_input = self.wait.until(ec.visibility_of_element_located(self.config_input_name))
+        name_input.clear()
+        name_input.send_keys(name)
+        cmd_input = self.wait.until(ec.visibility_of_element_located(self.config_input_command))
+        cmd_input.clear()
+        cmd_input.send_keys(command)
+
+        arg_input = self.wait.until(ec.visibility_of_element_located(self.config_input_arguments))
+        arg_input.clear()
+        arg_input.send_keys(arguments)
+
+    def click_to_save_new_configuration(self):
+        self.wait.until(ec.visibility_of_element_located(self.config_add_app_button)).click()
+
+    def title_ping_teste_internet(self):
+        return self.wait.until(ec.visibility_of_element_located(self.title_container)).text

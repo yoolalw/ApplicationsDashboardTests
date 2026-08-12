@@ -3,6 +3,7 @@ from time import sleep
 
 import allure
 import pytest
+from dotenv import set_key
 from pygments.lexers.css import SassLexer
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions
@@ -75,7 +76,7 @@ class TestHomePage:
 
     def test_creating_new_configuration_in_application(self):
         self.home_page.click_in_configuration_button_ping_teste_internet()
-        self.home_page.inserting_new_configuration_to_ping_server_internet('New name', 'ping','8.8.8.8 -t')
+        self.home_page.inserting_new_configuration_to_ping_server_internet('New name', 'ping', '8.8.8.8 -t')
         self.home_page.click_to_save_new_configuration()
         assert 'New name' in self.home_page.title_ping_teste_internet()
 
@@ -86,3 +87,14 @@ class TestHomePage:
         self.home_page.starting_application_ping_teste_internet()
         self.home_page.click_in_container()
         return self.home_page.terminal_displayed()
+
+    def test_generate_new_alerts(self):
+        self.home_page.click_in_new_application()
+        self.home_page.creating_new_application('ErrorApp', '3030', 'directory/app', 'ErrorCommand', 'NotRightArgument')
+        self.home_page.click_in_add_app()
+        self.home_page.starting_the_error_try_application()
+        self.home_page.click_in_alert_button()
+        assert self.home_page.verifying_alert_message_generated()
+        self.home_page.mark_alerts_read()
+        self.home_page.click_in_clear_all_button()
+

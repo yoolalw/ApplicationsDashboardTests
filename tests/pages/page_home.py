@@ -50,6 +50,8 @@ class HomePage:
         self.container_button_cancel_new_app = (By.XPATH,
                                                 '//*[@id="root"]/div/main/section/div[2]/aside/form/div[2]/button[1]')
 
+        self.alert_message_container = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/section/ul/li')
+
         # To insert new configuration in 'Ping Teste Internet'
         self.config_input_name = (By.XPATH,
                                   '//*[@id="root"]/div/main/section/div[2]/aside/form/div[1]/section[1]/div/label[1]/input')
@@ -66,6 +68,10 @@ class HomePage:
         self.container_terminal = (By.XPATH, '//*[@id="root"]/div/main/section/div[2]/div')
 
         self.all_container = (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[1]')
+
+        self.mark_all_read_button = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[2]/button[1]')
+        self.clear_all_button = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[2]/button[2]')
+
 
     @allure.step('Verifying fixed elements on the screen')
     def verifying_if_the_elements_are_displayed(self):
@@ -167,3 +173,20 @@ class HomePage:
     @allure.step('Verifying title from Ping Teste Internet has been changed to -> New Title')
     def title_ping_teste_internet(self):
         return self.wait.until(ec.visibility_of_element_located(self.title_container)).text
+
+    @allure.step('Starting the application')
+    def starting_the_error_try_application(self):
+        self.wait.until(ec.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[4]/div[2]/div[2]/button[2]'))).click()
+
+    @allure.step('Verifying error message container displayed')
+    def verifying_alert_message_generated(self):
+        return self.wait.until(ec.visibility_of_element_located(self.alert_message_container)).is_displayed()
+
+    @allure.step('Mark all alerts read')
+    def mark_alerts_read(self):
+        self.wait.until(ec.visibility_of_element_located(self.mark_all_read_button)).click()
+
+    @allure.step('Clear all alerts container')
+    def click_in_clear_all_button(self):
+        self.wait.until(ec.visibility_of_element_located(self.clear_all_button)).click()
+

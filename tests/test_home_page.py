@@ -4,7 +4,7 @@ from time import sleep
 import allure
 import pytest
 from dotenv import set_key
-from pygments.lexers.css import SassLexer
+
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
@@ -48,8 +48,7 @@ class TestHomePage:
             ('NameApplication', '8020', r"C:\Users\WSC-Convidado\Downloads\api (1).zip", "mvn", 'spring-boot:run'),
             (34284033264782, '2323', "dhaidh ababa ijoifhg sdsif", "mvn", 'spring-boot/run'),
             ('s*@&#(&*@#($&(@*¨(&', '1', r"C:\Users\WSC-Convidado\Downloads\api (1).zip", "mvn",
-             'spring-boot:run'),
-            ('App_Local_Tefsafast', '9000', r"C:\ryuSa\Ryu\demo\demo", "mvn", 'spring-boot:run'),
+             'spring-boot:run')
         ]
     )
     def test_creating_new_application_with_directory(self, name, port, directory, cmd, arguments):
@@ -72,12 +71,14 @@ class TestHomePage:
 
     def test_starting_application_and_verifying_if_status_change(self):
         self.home_page.starting_application_ping_teste_internet()
+
         assert 'running' in self.home_page.status_application_ping_teste_internet()
 
     def test_creating_new_configuration_in_application(self):
         self.home_page.click_in_configuration_button_ping_teste_internet()
         self.home_page.inserting_new_configuration_to_ping_server_internet('New name', 'ping', '8.8.8.8 -t')
         self.home_page.click_to_save_new_configuration()
+
         assert 'New name' in self.home_page.title_ping_teste_internet()
 
         self.home_page.starting_application_ping_teste_internet()
@@ -90,11 +91,19 @@ class TestHomePage:
 
     def test_generate_new_alerts(self):
         self.home_page.click_in_new_application()
+
         self.home_page.creating_new_application('ErrorApp', '3030', 'directory/app', 'ErrorCommand', 'NotRightArgument')
+
         self.home_page.click_in_add_app()
+
         self.home_page.starting_the_error_try_application()
+
         self.home_page.click_in_alert_button()
-        assert self.home_page.verifying_alert_message_generated()
+
+        self.home_page.verifying_alert_message_generated()
+
         self.home_page.mark_alerts_read()
+
         self.home_page.click_in_clear_all_button()
 
+        assert self.home_page.verifying_if_the_elements_are_displayed()

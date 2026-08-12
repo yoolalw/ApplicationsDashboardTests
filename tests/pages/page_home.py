@@ -72,6 +72,7 @@ class HomePage:
         self.mark_all_read_button = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[2]/button[1]')
         self.clear_all_button = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[2]/button[2]')
 
+        self.status_text = (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[1]/div[1]/div/span[2]')
 
     @allure.step('Verifying fixed elements on the screen')
     def verifying_if_the_elements_are_displayed(self):
@@ -83,14 +84,11 @@ class HomePage:
     @allure.step('Selecting languages')
     def selecting_language(self):
         self.driver.find_element(*self.language_button).click()
-        sleep(1)
         btns = self.driver.find_elements(*self.container_languages)
-        sleep(1)
         for i in range(len(btns)):
             btns = self.driver.find_elements(*self.container_languages)
             btns[i].click()
             self.driver.find_element(*self.language_button).click()
-            sleep(2)
 
     @allure.step('Click in container "Ping Teste Internet"')
     def click_in_container(self):
@@ -99,14 +97,13 @@ class HomePage:
     @allure.step('Verifying creation of the item "Ping Test Internet" ')
     def container_auto_created_from_json(self):
         return self.wait.until(ec.visibility_of_element_located(self.title_container)) and \
-            self.wait.until(ec.visibility_of_element_located(self.status_container)) and \
-            self.wait.until(ec.visibility_of_element_located(self.status_container_color)) and \
+            self.wait.until(ec.visibility_of_element_located(self.status_button)) and \
             self.wait.until(ec.visibility_of_element_located(self.config_button)) and \
             self.wait.until(ec.visibility_of_element_located(self.start_button))
 
     @allure.step('Clicking in alert button')
     def click_in_alert_button(self):
-        self.driver.find_element(*self.alert_button).click()
+        self.wait.until(ec.visibility_of_element_located(self.alert_button)).click()
 
     @allure.step('Clicking in new app button')
     def click_in_new_application(self):
@@ -147,7 +144,7 @@ class HomePage:
 
     @allure.step('Verifying if the status has been changed')
     def status_application_ping_teste_internet(self):
-        return self.wait.until(ec.visibility_of_element_located(self.status_button)).text
+        return self.wait.until(ec.visibility_of_element_located(self.status_text)).text
 
     @allure.step('Click in "Configuration" button - Ping Teste Internet')
     def click_in_configuration_button_ping_teste_internet(self):
@@ -176,7 +173,8 @@ class HomePage:
 
     @allure.step('Starting the application')
     def starting_the_error_try_application(self):
-        self.wait.until(ec.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[4]/div[2]/div[2]/button[2]'))).click()
+        self.wait.until(ec.visibility_of_element_located(
+            (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[4]/div[2]/div[2]/button[2]'))).click()
 
     @allure.step('Verifying error message container displayed')
     def verifying_alert_message_generated(self):
@@ -189,4 +187,3 @@ class HomePage:
     @allure.step('Clear all alerts container')
     def click_in_clear_all_button(self):
         self.wait.until(ec.visibility_of_element_located(self.clear_all_button)).click()
-

@@ -32,14 +32,24 @@ class HomePage:
         self.pt_language = (By.XPATH, '//*[@id="root"]/div/header/div[2]/div/div/button[1]')
 
         self.container_title_new_app = (By.XPATH, '//*[@id="root"]/div/main/section/div[2]/aside/div/h2')
-        self.container_input_name_new_app = (By.XPATH, '/html/body/div/div/main/section/div[2]/aside/form/div[1]/section[1]/div/label[1]/input')
-        self.container_input_port_new_app = (By.XPATH, '//*[@id="root"]/div/main/section/div[2]/aside/form/div[1]/section[1]/div/div/label[1]/input')
-        self.container_input_directory_new_app = (By.XPATH, '//*[@id="root"]/div/main/section/div[2]/aside/form/div[1]/section[1]/div/div/label[2]/input')
-        self.container_input_command_new_app = (By.XPATH, '//*[@id="root"]/div/main/section/div[2]/aside/form/div[1]/section[1]/div/label[3]/input')
-        self.container_input_arguments_new_app = (By.XPATH, '//*[@id="root"]/div/main/section/div[2]/aside/form/div[1]/section[1]/div/label[4]/input')
-        self.container_input_web_link_new_app = (By.XPATH, '//*[@id="root"]/div/main/section/div[2]/aside/form/div[1]/section[1]/div/label[5]/input')
-        self.container_button_add_app_new_app = (By.XPATH, '//*[@id="root"]/div/main/section/div[2]/aside/form/div[2]/button[2]')
-        self.container_button_cancel_new_app = (By.XPATH, '//*[@id="root"]/div/main/section/div[2]/aside/form/div[2]/button[1]')
+        self.container_input_name_new_app = (By.XPATH,
+                                             '/html/body/div/div/main/section/div[2]/aside/form/div[1]/section[1]/div/label[1]/input')
+        self.container_input_port_new_app = (By.XPATH,
+                                             '//*[@id="root"]/div/main/section/div[2]/aside/form/div[1]/section[1]/div/div/label[1]/input')
+        self.container_input_directory_new_app = (By.XPATH,
+                                                  '//*[@id="root"]/div/main/section/div[2]/aside/form/div[1]/section[1]/div/div/label[2]/input')
+        self.container_input_command_new_app = (By.XPATH,
+                                                '//*[@id="root"]/div/main/section/div[2]/aside/form/div[1]/section[1]/div/label[3]/input')
+        self.container_input_arguments_new_app = (By.XPATH,
+                                                  '//*[@id="root"]/div/main/section/div[2]/aside/form/div[1]/section[1]/div/label[4]/input')
+        self.container_input_web_link_new_app = (By.XPATH,
+                                                 '//*[@id="root"]/div/main/section/div[2]/aside/form/div[1]/section[1]/div/label[5]/input')
+        self.container_button_add_app_new_app = (By.XPATH,
+                                                 '//*[@id="root"]/div/main/section/div[2]/aside/form/div[2]/button[2]')
+        self.container_button_cancel_new_app = (By.XPATH,
+                                                '//*[@id="root"]/div/main/section/div[2]/aside/form/div[2]/button[1]')
+
+        self.container_input_xpath = (By.XPATH, '//input')
 
     @allure.step('Verifying fixed elements on the screen')
     def verifying_if_the_elements_are_displayed(self):
@@ -80,9 +90,19 @@ class HomePage:
     def creating_new_application(self, input_name, input_port, input_directory, input_cmd, input_arguments):
         self.wait.until(ec.visibility_of_element_located(self.container_input_name_new_app)).send_keys(input_name)
         self.wait.until(ec.visibility_of_element_located(self.container_input_port_new_app)).send_keys(input_port)
-        self.wait.until(ec.visibility_of_element_located(self.container_input_directory_new_app)).send_keys(input_directory)
+        self.wait.until(ec.visibility_of_element_located(self.container_input_directory_new_app)).send_keys(
+            input_directory)
         self.wait.until(ec.visibility_of_element_located(self.container_input_command_new_app)).send_keys(input_cmd)
-        self.wait.until(ec.visibility_of_element_located(self.container_input_arguments_new_app)).send_keys(input_arguments)
+        self.wait.until(ec.visibility_of_element_located(self.container_input_arguments_new_app)).send_keys(
+            input_arguments)
 
     def clicking_in_add_app(self):
         self.wait.until(ec.visibility_of_element_located(self.container_button_add_app_new_app)).click()
+
+    def verification_message_input_name(self):
+        return self.wait.until(ec.visibility_of_element_located(self.container_input_name_new_app)).get_attribute(
+            'validationMessage')
+
+    def verification_message_input_cmd(self):
+        return self.wait.until(ec.visibility_of_element_located(self.container_input_command_new_app)).get_attribute(
+            'validationMessage')

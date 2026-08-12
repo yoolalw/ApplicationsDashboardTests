@@ -37,8 +37,8 @@ class TestHomePage:
         assert True
 
     # PDT04
-    def test_clicking_in_new_app_button(self):
-        assert self.home_page.clicking_in_new_application()
+    def test_click_in_new_app_button(self):
+        assert self.home_page.click_in_new_application()
 
     # PDT07 + PDT08
     @pytest.mark.parametrize(
@@ -52,9 +52,9 @@ class TestHomePage:
         ]
     )
     def test_creating_new_application_with_directory(self, name, port, directory, cmd, arguments):
-        self.home_page.clicking_in_new_application()
+        self.home_page.click_in_new_application()
         self.home_page.creating_new_application(name, port, directory, cmd, arguments)
-        self.home_page.clicking_in_add_app()
+        self.home_page.click_in_add_app()
 
     @pytest.mark.parametrize(
         "name, port, directory, cmd, arguments, expected",
@@ -64,11 +64,9 @@ class TestHomePage:
         ]
     )
     def test_verifying_field_null_message(self, name, port, directory, cmd, arguments, expected):
-        self.home_page.clicking_in_new_application()
+        self.home_page.click_in_new_application()
         self.home_page.creating_new_application(name, port, directory, cmd, arguments)
-        sleep(2)
-        self.home_page.clicking_in_add_app()
-        sleep(2)
+        self.home_page.click_in_add_app()
         assert expected in self.home_page.verification_message_input_name() or self.home_page.verification_message_input_cmd()
 
     def test_starting_application_and_verifying_if_status_change(self):
@@ -83,3 +81,8 @@ class TestHomePage:
 
         self.home_page.starting_application_ping_teste_internet()
         assert 'running' in self.home_page.status_application_ping_teste_internet()
+
+    def test_verifying_if_terminal_are_running(self):
+        self.home_page.starting_application_ping_teste_internet()
+        self.home_page.click_in_container()
+        return self.home_page.terminal_displayed()

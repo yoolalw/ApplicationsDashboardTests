@@ -1,7 +1,7 @@
 [
   {
     "id": "ping-teste",
-    "name": "New name",
+    "name": "Ping Teste Internet",
     "command": "ping",
     "args": "8.8.8.8 -t",
     "port": "",

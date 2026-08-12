@@ -63,6 +63,10 @@ class HomePage:
                                        '//*[@id="root"]/div/main/section/div[2]/aside/form/div[1]/section/div/label[4]/input')
         self.config_add_app_button = (By.XPATH, '//*[@id="root"]/div/main/section/div[2]/aside/form/div[2]/button[2]')
 
+        self.container_terminal = (By.XPATH, '//*[@id="root"]/div/main/section/div[2]/div')
+
+        self.all_container = (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[1]')
+
     @allure.step('Verifying fixed elements on the screen')
     def verifying_if_the_elements_are_displayed(self):
         return self.driver.find_element(*self.title).is_displayed() and \
@@ -82,6 +86,10 @@ class HomePage:
             self.driver.find_element(*self.language_button).click()
             sleep(2)
 
+    @allure.step('Click in container "Ping Teste Internet"')
+    def click_in_container(self):
+        self.wait.until(ec.visibility_of_element_located(self.all_container)).click()
+
     @allure.step('Verifying creation of the item "Ping Test Internet" ')
     def container_auto_created_from_json(self):
         return self.wait.until(ec.visibility_of_element_located(self.title_container)) and \
@@ -91,14 +99,19 @@ class HomePage:
             self.wait.until(ec.visibility_of_element_located(self.start_button))
 
     @allure.step('Clicking in alert button')
-    def clicking_in_alert_button(self):
+    def click_in_alert_button(self):
         self.driver.find_element(*self.alert_button).click()
 
     @allure.step('Clicking in new app button')
-    def clicking_in_new_application(self):
+    def click_in_new_application(self):
         self.driver.find_element(*self.new_application).click()
         return self.wait.until(ec.visibility_of_element_located(self.container_title_new_app)).is_displayed()
 
+    @allure.step('Verifying if the terminal are displayed')
+    def terminal_displayed(self):
+        return self.wait.until(ec.visibility_of_element_located(self.container_terminal)).is_displayed()
+
+    @allure.step('Creating new application')
     def creating_new_application(self, input_name, input_port, input_directory, input_cmd, input_arguments):
         self.wait.until(ec.visibility_of_element_located(self.container_input_name_new_app)).send_keys(input_name)
         self.wait.until(ec.visibility_of_element_located(self.container_input_port_new_app)).send_keys(input_port)
@@ -108,26 +121,33 @@ class HomePage:
         self.wait.until(ec.visibility_of_element_located(self.container_input_arguments_new_app)).send_keys(
             input_arguments)
 
-    def clicking_in_add_app(self):
+    @allure.step('Click in "Add App" (New Application container)')
+    def click_in_add_app(self):
         self.wait.until(ec.visibility_of_element_located(self.container_button_add_app_new_app)).click()
 
+    @allure.step('Validate error message - Input Name')
     def verification_message_input_name(self):
         return self.wait.until(ec.visibility_of_element_located(self.container_input_name_new_app)).get_attribute(
             'validationMessage')
 
+    @allure.step('Validate error message - Input Commmand')
     def verification_message_input_cmd(self):
         return self.wait.until(ec.visibility_of_element_located(self.container_input_command_new_app)).get_attribute(
             'validationMessage')
 
+    @allure.step('Click in "Start" button - Ping Teste Internet')
     def starting_application_ping_teste_internet(self):
         self.wait.until(ec.visibility_of_element_located(self.start_button)).click()
 
+    @allure.step('Verifying if the status has been changed')
     def status_application_ping_teste_internet(self):
         return self.wait.until(ec.visibility_of_element_located(self.status_button)).text
 
+    @allure.step('Click in "Configuration" button - Ping Teste Internet')
     def click_in_configuration_button_ping_teste_internet(self):
         self.wait.until(ec.visibility_of_element_located(self.config_button)).click()
 
+    @allure.step('Inserting new configuration on Ping Teste Internet')
     def inserting_new_configuration_to_ping_server_internet(self, name, command, arguments):
         name_input = self.wait.until(ec.visibility_of_element_located(self.config_input_name))
         name_input.clear()
@@ -140,8 +160,10 @@ class HomePage:
         arg_input.clear()
         arg_input.send_keys(arguments)
 
+    @allure.step('Click in "Add App" (Configuration container) - Ping Teste Internet')
     def click_to_save_new_configuration(self):
         self.wait.until(ec.visibility_of_element_located(self.config_add_app_button)).click()
 
+    @allure.step('Verifying title from Ping Teste Internet has been changed to -> New Title')
     def title_ping_teste_internet(self):
         return self.wait.until(ec.visibility_of_element_located(self.title_container)).text

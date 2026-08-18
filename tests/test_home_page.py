@@ -91,19 +91,11 @@ class TestHomePage:
 
     def test_generate_new_alerts(self):
         self.home_page.click_in_new_application()
-
         self.home_page.creating_new_application('ErrorApp', '3030', 'directory/app', 'ErrorCommand', 'NotRightArgument')
-
         self.home_page.click_in_add_app()
-
         self.home_page.starting_the_error_try_application()
-
         self.home_page.click_in_alert_button()
-
         self.home_page.verifying_alert_message_generated()
-
         self.home_page.mark_alerts_read()
-
         self.home_page.click_in_clear_all_button()
-
-        assert self.home_page.verifying_if_the_elements_are_displayed()
+        assert self.home_page.verifying_message_in_alert_container()

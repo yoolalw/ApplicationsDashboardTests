@@ -74,6 +74,9 @@ class HomePage:
 
         self.status_text = (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[1]/div[1]/div/span[2]')
 
+        self.message_container_alerts = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/section/div')
+
+
     @allure.step('Verifying fixed elements on the screen')
     def verifying_if_the_elements_are_displayed(self):
         return self.driver.find_element(*self.title).is_displayed() and \
@@ -173,8 +176,8 @@ class HomePage:
 
     @allure.step('Starting the application')
     def starting_the_error_try_application(self):
-        self.wait.until(ec.visibility_of_element_located(
-            (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[4]/div[2]/div[2]/button[2]'))).click()
+        self.wait.until(ec.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[5]/div[2]/div[2]/button[2]'))).click()
+
 
     @allure.step('Verifying error message container displayed')
     def verifying_alert_message_generated(self):
@@ -187,3 +190,7 @@ class HomePage:
     @allure.step('Clear all alerts container')
     def click_in_clear_all_button(self):
         self.wait.until(ec.visibility_of_element_located(self.clear_all_button)).click()
+
+    @allure.step("Verifying if the container is empty")
+    def verifying_message_in_alert_container(self):
+        return self.wait.until(ec.visibility_of_element_located(self.message_container_alerts)).is_displayed()

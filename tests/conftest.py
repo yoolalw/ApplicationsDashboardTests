@@ -14,5 +14,7 @@ def driver(request):
     request.cls.driver = driver
     request.cls.wait = wait
 
+    driver.implicitly_wait(5)
+
     yield driver
     driver.quit()

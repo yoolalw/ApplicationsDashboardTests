@@ -13,5 +13,26 @@
     "internalFolder": "",
     "autoStart": false,
     "dependsOn": []
+  },
+  {
+    "id": "517a3a88-1b05-438a-9413-149324d388a4",
+    "name": "App_Local_Test",
+    "command": "mvn",
+    "args": "spring-boot:run",
+    "port": "8080",
+    "cwd": "C:\\Blooms\\BloomsKimono\\jvApi",
+    "webLink": "",
+    "useInternalFolder": false,
+    "internalFolder": "",
+    "autoStart": false,
+    "dependsOn": [],
+    "shell": true,
+    "advancedEnabled": false,
+    "alternatePorts": [],
+    "secondaryCwd": "",
+    "advancedCommand": "",
+    "advancedArgs": "",
+    "advancedShell": true,
+    "enabled": true
   }
 ]

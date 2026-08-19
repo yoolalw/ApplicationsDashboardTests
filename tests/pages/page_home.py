@@ -22,8 +22,8 @@ class PageHome:
         #language
         self.languages_button = (By.XPATH, '//*[@id="root"]/div/header/div[2]/div/button')
         self.languages_container = (By.XPATH, '//*[@id="root"]/div/header/div[2]/div/div/button')
-
         self.language = (By.XPATH, '//*[@id="root"]/div/header/div[2]/div/div/button[1]')
+
         #alert
         self.alert_button = (By.XPATH, '//*[@id="root"]/div/header/div[2]/button[1]')
         self.alert_title = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[1]/div[1]/h2')
@@ -87,6 +87,9 @@ class PageHome:
         return self.wait.until(ec.visibility_of_element_located(self.alert_message_container)).is_displayed()
 
     #click elements
+    def click_to_change_language_for_portuguese(self):
+        self.wait.until(ec.visibility_of_element_located(self.language)).click()
+
     def click_configurations_from_the_container_created(self):
         self.wait.until(ec.visibility_of_element_located(self.container_created_button_config)).click()
 

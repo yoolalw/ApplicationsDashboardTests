@@ -55,5 +55,26 @@
     "advancedArgs": "",
     "advancedShell": true,
     "enabled": true
+  },
+  {
+    "id": "042d2145-5391-47e3-939e-5432e7c7d418",
+    "name": "Starting java application",
+    "command": "mvn",
+    "args": "spring-boot:run",
+    "port": "8080",
+    "cwd": "C:\\Blooms\\BloomsKimono\\jvApi",
+    "webLink": "",
+    "useInternalFolder": false,
+    "internalFolder": "",
+    "autoStart": false,
+    "dependsOn": [],
+    "shell": true,
+    "advancedEnabled": false,
+    "alternatePorts": [],
+    "secondaryCwd": "",
+    "advancedCommand": "",
+    "advancedArgs": "",
+    "advancedShell": true,
+    "enabled": true
   }
 ]

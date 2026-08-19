@@ -1,5 +1,8 @@
+from time import sleep
+
 import pytest
 import allure
+from dotenv import set_key
 from selenium.webdriver.support import expected_conditions as ec
 
 
@@ -18,7 +21,8 @@ class PageHome:
 
         #language
         self.languages_button = (By.XPATH, '//*[@id="root"]/div/header/div[2]/div/button')
-        self.languages_container = (By.XPATH, '//*[@id="root"]/div/header/div[2]/div/div')
+        self.languages_container = (By.XPATH, '//*[@id="root"]/div/header/div[2]/div/div/button')
+
         self.language = (By.XPATH, '//*[@id="root"]/div/header/div[2]/div/div/button[1]')
         #alert
         self.alert_button = (By.XPATH, '//*[@id="root"]/div/header/div[2]/button[1]')
@@ -50,17 +54,18 @@ class PageHome:
         self.container_created = (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[2]')
         self.container_created_title = (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[2]/div[1]/h3')
         self.container_created_status = (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[2]/div[1]/div/span[2]')
-        self.container_created_button_start = (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[2]/div[2]/div[2]/button[1]')
-        self.container_created_button_config = (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[2]/div[2]/div[2]/button[2]')
+        self.container_created_button_start = (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[2]/div[2]/div[2]/button[2]')
+        self.container_created_button_config = (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[2]/div[2]/div[2]/button[3]')
 
         # container for negative tests
         self.container_created_for_generate_alert = (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[3]')
         self.container_created_for_generate_alert_title = (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[3]/div[1]/h3')
         self.container_created_for_generate_alert_status = (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[3]/div[1]/div/span[2]')
-        self.container_created_for_generate_alert_button_start = (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[3]/div[2]/div[2]/button[1]')
-        self.container_created_for_generate_alert_button_config = (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[3]/div[2]/div[2]/button[2]')
+        self.container_created_for_generate_alert_button_start = (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[3]/div[2]/div[2]/button[2]')
+        self.container_created_for_generate_alert_button_config = (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[3]/div[2]/div[2]/button[3]')
 
     #displayed elements
+
 
     def verifying_elements_displayed_in_home(self):
         return self.wait.until(ec.visibility_of_element_located(self.page_title)).is_displayed() and \
@@ -72,11 +77,11 @@ class PageHome:
         return self.wait.until(ec.text_to_be_present_in_element(self.container_ping_teste_internet_title, 'Ping Teste Internet'))
 
     def verifying_if_the_container_has_been_created(self):
-        return self.wait.until(ec.visibility_of_element_located(self.container_created)) and \
-            self.wait.until(ec.visibility_of_element_located(self.container_created_title)) and \
-            self.wait.until(ec.visibility_of_element_located(self.container_created_status)) and \
-            self.wait.until(ec.visibility_of_element_located(self.container_created_button_config)) and \
-            self.wait.until(ec.visibility_of_element_located(self.container_created_button_start) )
+        return self.wait.until(ec.visibility_of_element_located(self.container_created)).is_displayed() and \
+            self.wait.until(ec.visibility_of_element_located(self.container_created_title)).is_displayed() and \
+            self.wait.until(ec.visibility_of_element_located(self.container_created_status)).is_displayed() and \
+            self.wait.until(ec.visibility_of_element_located(self.container_created_button_config)).is_displayed() and \
+            self.wait.until(ec.visibility_of_element_located(self.container_created_button_start)).is_displayed()
 
     def verifying_if_the_alert_has_been_generated(self):
         return self.wait.until(ec.visibility_of_element_located(self.alert_message_container)).is_displayed()
@@ -121,6 +126,9 @@ class PageHome:
         self.wait.until(ec.visibility_of_element_located(self.new_app_input_button_cancel)).click()
 
     #texts
+    def verifying_text_from_alerts_container(self):
+        return self.wait.until(ec.visibility_of_element_located(self.alert_container)).text
+
     def verifying_status_from_created_container(self):
         return self.wait.until(ec.visibility_of_element_located(self.container_created_status)).text
 
@@ -158,11 +166,11 @@ class PageHome:
         self.wait.until(ec.visibility_of_element_located(self.new_app_input_command)).send_keys(input_command)
         self.wait.until(ec.visibility_of_element_located(self.new_app_input_arguments)).send_keys(input_arguments)
 
-
     def switch_system_language(self):
-        self.wait.until(ec.visibility_of_element_located(self.languages_button))
-        languages = self.driver.find_element(*self.languages_container)
-        for i in range(len(languages)):
-            languages = self.driver.find_element(*self.languages_container)
-            languages[i].click()
-            self.wait.until(ec.visibility_of_element_located(self.languages_button)).click()
+        self.driver.find_element(*self.languages_button).click()
+        container = self.driver.find_elements(*self.languages_container)
+
+        for i in range(len(container)):
+            container = self.driver.find_elements(*self.languages_container)
+            container[i].click()
+            self.driver.find_element(*self.languages_button).click()

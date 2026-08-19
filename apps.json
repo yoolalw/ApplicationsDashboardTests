@@ -13,47 +13,6 @@
     "internalFolder": "",
     "autoStart": false,
     "dependsOn": []
-  },
-  {
-    "id": "eee10aab-49af-48b6-a74e-6ea34e434f49",
-    "name": "App_Local_TestNew Name",
-    "command": "npx",
-    "args": "spring-boot:run",
-    "port": "8080",
-    "cwd": "C:yuSa\\RyuFront\\RyuStockSA",
-    "webLink": "",
-    "useInternalFolder": false,
-    "internalFolder": "",
-    "autoStart": false,
-    "dependsOn": [],
-    "shell": true,
-    "advancedEnabled": false,
-    "alternatePorts": [],
-    "secondaryCwd": "",
-    "advancedCommand": "",
-    "advancedArgs": "",
-    "advancedShell": true,
-    "enabled": true
-  },
-  {
-    "id": "35aa09f3-6c5e-4348-a9a7-0effd73c8446",
-    "name": "Application With Error",
-    "command": "wrong",
-    "args": "wrong",
-    "port": "2222",
-    "cwd": "wrong",
-    "webLink": "",
-    "useInternalFolder": false,
-    "internalFolder": "",
-    "autoStart": false,
-    "dependsOn": [],
-    "shell": true,
-    "advancedEnabled": false,
-    "alternatePorts": [],
-    "secondaryCwd": "",
-    "advancedCommand": "",
-    "advancedArgs": "",
-    "advancedShell": true,
-    "enabled": true
   }
+
 ]

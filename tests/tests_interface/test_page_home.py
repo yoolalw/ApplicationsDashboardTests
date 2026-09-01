@@ -60,7 +60,7 @@ class TestPageHome:
         self.page_home.click_on_start_the_application_created()
         assert 'running' in self.page_home.verifying_status_from_created_container()
 
-    #9
+    #9 - #10 - #11
     @allure.title('Verifying if the alerts has been created')
     def test_verifying_if_the_alert_has_been_generated(self):
         self.page_home.click_on_new_app_button()

@@ -48,3 +48,16 @@ class PageConfiguration:
         self.checkbox_replace_all_instances = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/form/section[6]/div[2]/label/input')
         self.button_save_configurations = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/form/div/div/button')
 
+            # Container style
+        self.button_card_view = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[1]/div/button[1]')
+        self.button_list_view = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[1]/div/button[2]')
+        self.button_theme_light = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[2]/div/button[1]')
+        self.button_theme_dark = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[2]/div/button[2]')
+        self.button_color_blue_standard = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[3]/div/div/div/button[1]')
+        self.button_color_blue_ocean = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[3]/div/div/div/button[2]')
+        self.button_color_green = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[3]/div/div/div/button[3]')
+        self.button_color_red_alert = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[3]/div/div/div/button[4]')
+        self.button_color_purple_signal = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[3]/div/div/div/button[5]')
+        self.button_color_orange_energy = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[3]/div/div/div/button[6]')
+        self.button_color_white_clean = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[3]/div/div/div/button[7]')
+

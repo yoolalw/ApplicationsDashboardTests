@@ -1,5 +1,6 @@
 import allure
 import pytest
+from pytweening import easeOutExpo
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as ec
@@ -51,13 +52,17 @@ class PageHomePage:
 
     @allure.step("Click in 'Open -> applicationWithWebLink'")
     def click_in_button_open_application_with_web_link(self):
-        running = self.wait.until(ec.text_to_be_present_in_element(self.container_with_web_link_status, 'Running'))
-        if running:
-            self.wait.until(ec.element_to_be_clickable(self.container_with_web_link_open_button)).click()
+        self.wait.until(ec.element_to_be_clickable(self.container_with_web_link_open_button)).click()
 
     @allure.step("Verifying if the status has been changed from 'Stopped' to 'Running' (Instance with Web Link)")
     def verifying_if_the_status_has_been_changed_container_with(self):
         return self.wait.until(ec.text_to_be_present_in_element(self.container_with_web_link_status, 'Running'))
+
+    def testing_return(self):
+        element = self.wait.until(ec.visibility_of_element_located(self.container_with_web_link_status))
+        print(element.text)
+        return element
+
 
     @allure.step("Verifying if the status has been changed from 'Stopped' to 'Running' (Instance without Web Link)")
     def verifying_if_the_status_has_been_changed_container_without(self):

@@ -66,6 +66,41 @@ class PageHome:
         self.container_created_for_generate_alert_button_start = (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[3]/div[2]/div[2]/button[2]')
         self.container_created_for_generate_alert_button_config = (By.XPATH, '//*[@id="root"]/div/main/section/div/div[2]/article[3]/div[2]/div[2]/button[3]')
 
+        # !! >> sidebar
+        self.sidebar_home_button = (By.XPATH, '//*[@id="root"]/div/main/aside/div[1]/button[1]')
+        self.sidebar_homepage_button = (By.XPATH, '//*[@id="root"]/div/main/aside/div[1]/button[2]')
+        self.sidebar_aichat_button = (By.XPATH, '//*[@id="root"]/div/main/aside/div[1]/button[3]')
+        self.sidebar_patchfiles_button = (By.XPATH, '//*[@id="root"]/div/main/aside/div[1]/button[4]')
+        self.sidebar_configurations_button = (By.XPATH, '//*[@id="root"]/div/main/aside/div[2]/button[1]')
+        self.sidebar_about_button = (By.XPATH, '//*[@id="root"]/div/main/aside/div[2]/button[2]')
+
+
+
+    # sidebar clicks
+    @allure.step("Click in SideBar button -> Home page")
+    def click_in_sidebar_button_home_page(self):
+        self.wait.until(ec.element_to_be_clickable(self.sidebar_home_button)).click()
+
+    @allure.step("Click in SideBar button -> HomePage page")
+    def click_in_sidebar_button_homepage_page(self):
+        self.wait.until(ec.element_to_be_clickable(self.sidebar_homepage_button)).click()
+
+    @allure.step("Click in SideBar button -> AIChat page")
+    def click_in_sidebar_button_home_page(self):
+        self.wait.until(ec.element_to_be_clickable(self.sidebar_aichat_button)).click()
+
+    @allure.step("Click in SideBar button -> PatchFiles page")
+    def click_in_sidebar_button_home_page(self):
+        self.wait.until(ec.element_to_be_clickable(self.sidebar_patchfiles_button)).click()
+
+    @allure.step("Click in SideBar button -> Configurations page")
+    def click_in_sidebar_button_home_page(self):
+        self.wait.until(ec.element_to_be_clickable(self.sidebar_configurations_button)).click()
+
+    @allure.step("Click in SideBar button -> About page")
+    def click_in_sidebar_button_home_page(self):
+        self.wait.until(ec.element_to_be_clickable(self.sidebar_about_button)).click()
+
     #displayed elements
     @allure.step("Verifying if the elements are displayed in Home Page")
     def verifying_elements_displayed_in_home(self):

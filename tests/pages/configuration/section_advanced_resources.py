@@ -1,6 +1,8 @@
 import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.select import Select
 
 from tests.pages.configuration.page_base import PageBase
 
@@ -23,7 +25,6 @@ class SectionAdvancedResources(PageBase):
                                              '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/section[1]/div[2]/label[3]')
 
             # Ai Chat configuration
-
         self.select_open_ai_provider = (By.XPATH,
                                         '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/section[2]/div[2]/div/label[1]/select')
         self.select_options = (By.XPATH,
@@ -64,4 +65,18 @@ class SectionAdvancedResources(PageBase):
     # Select !
     @allure.step("Selecting options in Ai Provider container")
     def select_options_in_ai_provider_container(self):
-        pass
+        select_element = self.wait.until(expected_conditions.visibility_of_element_located(self.select_open_ai_provider))
+        select = Select(select_element)
+        return select
+
+
+    # Input !
+
+    @allure.step("Inserting values in field Model Ai")
+    def inserting_values_in_field_model_ai(self, value):
+        self.fill(self.input_model_ai, value)
+
+    @allure.step("Inserting values in field Base Url Customized")
+    def inserting_values_in_customized_base_url_ai(self, value):
+        self.fill(self.input_base_url_customized, value)
+

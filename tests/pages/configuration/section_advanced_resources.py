@@ -69,7 +69,6 @@ class SectionAdvancedResources(PageBase):
         select = Select(select_element)
         return select
 
-
     # Input !
 
     @allure.step("Inserting values in field Model Ai")

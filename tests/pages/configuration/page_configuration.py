@@ -6,6 +6,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from tests.conftest import driver
 from tests.pages.configuration.page_base import PageBase
 from tests.pages.configuration.section_enable_apps import SectionEnableApps
+from tests.pages.configuration.section_general import SectionGeneral
 
 
 class PageConfiguration(PageBase):
@@ -20,21 +21,8 @@ class PageConfiguration(PageBase):
         self.bar_button_advanced_resources = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[2]/button[5]')
 
         self.section_enable = SectionEnableApps(driver)
+        self.section_general = SectionGeneral(driver)
 
-            # Container style
-        self.button_card_view = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[1]/div/button[1]')
-        self.button_list_view = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[1]/div/button[2]')
-        self.button_theme_light = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[2]/div/button[1]')
-        self.button_theme_dark = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[2]/div/button[2]')
-        self.button_color_blue_standard = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[3]/div/div/div/button[1]')
-        self.button_color_blue_ocean = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[3]/div/div/div/button[2]')
-        self.button_color_green = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[3]/div/div/div/button[3]')
-        self.button_color_red_alert = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[3]/div/div/div/button[4]')
-        self.button_color_purple_signal = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[3]/div/div/div/button[5]')
-        self.button_color_orange_energy = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[3]/div/div/div/button[6]')
-        self.button_color_white_clean = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[3]/div/div/div/button[7]')
-        self.button_color_random = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[3]/div/div/div/button[8]')
-        self.button_save_configurations_style_container = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[4]/div/button')
 
             # Container advanced resources
         self.button_enable_ai_chat = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/section[1]/div[2]/label[1]')

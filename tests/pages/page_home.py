@@ -86,15 +86,15 @@ class PageHome:
         self.wait.until(ec.element_to_be_clickable(self.sidebar_homepage_button)).click()
 
     @allure.step("Click in SideBar button -> AIChat page")
-    def click_in_sidebar_button_home_page(self):
+    def click_in_sidebar_button_ai_chat_page(self):
         self.wait.until(ec.element_to_be_clickable(self.sidebar_aichat_button)).click()
 
     @allure.step("Click in SideBar button -> PatchFiles page")
-    def click_in_sidebar_button_home_page(self):
+    def click_in_sidebar_button_patch_files_page(self):
         self.wait.until(ec.element_to_be_clickable(self.sidebar_patchfiles_button)).click()
 
     @allure.step("Click in SideBar button -> Configurations page")
-    def click_in_sidebar_button_home_page(self):
+    def click_in_sidebar_button_configurations_page(self):
         self.wait.until(ec.element_to_be_clickable(self.sidebar_configurations_button)).click()
 
     @allure.step("Click in SideBar button -> About page")

@@ -1,8 +1,8 @@
 [
   {
     "id": "ping-teste",
-    "name": "Ping Teste Internet",
-    "command": "ping",
+    "name": "New Name",
+    "command": "ipconfig",
     "args": "8.8.8.8 -t",
     "port": "",
     "cwd": "",
@@ -13,26 +13,5 @@
     "internalFolder": "",
     "autoStart": false,
     "dependsOn": []
-  },
-  {
-    "id": "bb64ea98-b55a-4b89-94f7-fa02b3841d43",
-    "name": "applicationWithWebLink",
-    "command": "mvn",
-    "args": "spring-boot:run",
-    "port": "8080",
-    "cwd": "C:\\Users\\WSC-Convidado\\Documents\\Coop+\\api",
-    "webLink": "http://localhost:8080/auth/login",
-    "useInternalFolder": false,
-    "internalFolder": "",
-    "autoStart": false,
-    "dependsOn": [],
-    "shell": true,
-    "advancedEnabled": false,
-    "alternatePorts": [],
-    "secondaryCwd": "",
-    "advancedCommand": "",
-    "advancedArgs": "",
-    "advancedShell": true,
-    "enabled": true
   }
 ]

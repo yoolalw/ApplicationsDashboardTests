@@ -29,7 +29,6 @@ class PageConfiguration(PageBase):
         self.section_section_advanced_resources = SectionAdvancedResources(driver)
 
 
-
     # Click !
     @allure.step("Click in button on bar to show enabled apps")
     def click_in_bar_button_show_enabled_apps(self):

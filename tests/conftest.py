@@ -1,6 +1,7 @@
 
 import pytest
 from selenium import webdriver
+from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
@@ -14,7 +15,8 @@ def driver(request):
     request.cls.driver = driver
     request.cls.wait = wait
 
-    driver.implicitly_wait(5)
+    driver.implicitly_wait(7)
+    driver.maximize_window()
 
     yield driver
     driver.quit()

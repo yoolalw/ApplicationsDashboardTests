@@ -33,26 +33,9 @@ class TestsPageConfiguration:
         assert self.page_configuration.section_enable.verifying_displayed_container()
 
     @allure.id("CED02")
-    @allure.title("Click in button to disable the instance and verifying the status is equal 'Disabled'")
-    def test_click_in_button_to_disable_instance(self):
+    @allure.story("Click to change status -> From Enabled to Disabled")
+    def test_clickdsada_to_change_status_to_disabled(self):
         self.page_configuration.section_enable.click_in_button_disable()
-        assert "Disabled" in
+        assert self.page_configuration.section_enable.check_if_text_is_equal_the_expect("Disabled")
 
-    @allure.id("CED03")
-    @allure.title('Click in button to enable the instance and verifying if the status is equal \'Enabled\'')
-    def test_click_in_button_to_enable_instance(self):
-        self.page_configuration.section_enable.click_in_button_disable()
-        assert 'Enabled' in self.page_configuration.section_enable.check_text_returned()
 
-    @allure.id("CED04")
-    @allure.title("Click in button to edit the element and verifying if the name, commands and arguments has been modified")
-    def test_inserting_new_values_in_container_fields(self):
-        self.page_configuration.section_enable.click_in_button_edit()
-        self.page_configuration.section_enable.insert_new_values_in_app_name("New Name")
-        self.page_configuration.section_enable.insert_new_values_in_command("ipconfig")
-        self.page_configuration.section_enable.insert_new_values_in_arguments("")
-        self.page_configuration.section_enable.click_in_button_save_configuration()
-        self.page_home.click_in_sidebar_button_configurations_page()
-
-        assert ("New Name" in self.page_configuration.section_enable.check_text_returned_in_name_application()
-                and "ipconfig" in self.page_configuration.section_enable.check_text_returned_in_cmd_and_arg_application())

@@ -1,13 +1,13 @@
 [
   {
     "id": "ping-teste",
-    "name": "New Name",
-    "command": "ipconfig",
+    "name": "Ping Teste Internet",
+    "command": "ping",
     "args": "8.8.8.8 -t",
     "port": "",
     "cwd": "",
     "shell": true,
-    "enabled": true,
+    "enabled": false,
     "webLink": "",
     "useInternalFolder": false,
     "internalFolder": "",

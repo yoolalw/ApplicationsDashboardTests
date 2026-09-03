@@ -2,12 +2,8 @@ import pytest
 from selenium.webdriver.common.devtools.v143.css import set_keyframe_key
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as ec
-
 from selenium.webdriver.support.wait import WebDriverWait
-
 from tests.conftest import driver
-
-
 class PageBase:
     def __init__(self, driver: WebDriver):
         self.driver = driver
@@ -26,6 +22,9 @@ class PageBase:
 
     def text(self, locator):
         return self.wait.until(ec.visibility_of_element_located(locator)).text
+
+    def text_eq(self, locator, value):
+        return self.wait.until(ec.text_to_be_present_in_element(locator, value))
 
     def find_all_elements_in_container(self, locator):
         return self.driver.find_elements(locator)

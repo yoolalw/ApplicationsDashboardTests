@@ -1,6 +1,7 @@
 import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.support import expected_conditions
 
 from tests.pages.configuration.page_base import PageBase
 
@@ -35,6 +36,7 @@ class SectionStyle(PageBase):
                                     '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[3]/div/div/div/button[8]')
         self.button_save_configurations_style_container = (By.XPATH,
                                                            '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[4]/div/button')
+        self.simulator_circle = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/aside/section/div[2]/div[3]/span[2]')
 
     # Clicks !
     @allure.step("Click in button to change card view")
@@ -88,3 +90,8 @@ class SectionStyle(PageBase):
     @allure.step("Click in button to save all configurations")
     def click_button_to_save_configurations(self):
         self.click(self.button_save_configurations_style_container)
+
+    @allure.step("Returns the color from the circle in 'Primary action'")
+    def return_the_color_from_circle(self):
+        circle = self.wait.until(expected_conditions.visibility_of_element_located(self.simulator_circle))
+        return circle.value_of_css_property("background-color")

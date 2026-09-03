@@ -7,7 +7,7 @@
     "port": "",
     "cwd": "",
     "shell": true,
-    "enabled": false,
+    "enabled": true,
     "webLink": "",
     "useInternalFolder": false,
     "internalFolder": "",

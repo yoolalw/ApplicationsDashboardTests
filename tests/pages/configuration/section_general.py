@@ -50,6 +50,9 @@ class SectionGeneral(PageBase):
                                                '//*[@id="root"]/div/main/section/div/div/div[3]/div/form/section[6]/div[2]/label/input')
         self.button_save_configurations = (By.XPATH,
                                            '//*[@id="root"]/div/main/section/div/div/div[3]/div/form/div/div/button')
+        self.container_directory = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/form/section[4]/div[2]/div[3]/div[2]')
+        self.container_directory_folder = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/form/section[4]/div[2]/div[3]/div[2]/span')
+
 
         self.count_all_apps = (By.XPATH,
                                '//*[@id="root"]/div/main/section/div/div/div[3]/div/aside/section[1]/div[2]/div[1]/p[2]')
@@ -58,7 +61,14 @@ class SectionGeneral(PageBase):
         self.count_disabled_apps = (By.XPATH,
                                     '//*[@id="root"]/div/main/section/div/div/div[3]/div/aside/section[1]/div[2]/div[3]/p[2]')
 
-    # Clicks !
+        self.modal_instances = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[4]/div')
+        self.modal_instances_name = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[4]/div/div[2]/ul/li/label/span')
+        self.modal_instances_checkbox = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[4]/div/div[2]/ul/li/label/input')
+        self.modal_instances_button_save = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[4]/div/div[3]/button[2]')
+
+        self.message_success = (By.XPATH, '//span[contains(text(), "Settings saved")]')
+
+    # Clicks
     @allure.step("Click in button to include internal server")
     def click_button_internal_server(self):
         self.click(self.button_internal_server)
@@ -99,6 +109,10 @@ class SectionGeneral(PageBase):
     def click_button_save_configurations(self):
         self.click(self.button_save_configurations)
 
+    @allure.step("Click to save the modal with instances needed to auto start")
+    def click_button_to_save_instances_with_auto_save(self):
+        self.click(self.modal_instances_button_save)
+
     # Inputs !
     @allure.step("Inserting new customized homepage url")
     def inserting_customized_url(self, value):
@@ -113,6 +127,10 @@ class SectionGeneral(PageBase):
         self.fill(self.input_directory, value)
 
     # CheckBox !
+    @allure.step("Checking instance to enable Auto Start")
+    def check_instance_autostart(self):
+        self.click(self.modal_instances_checkbox)
+
     @allure.step("Checking options in CheckBox -> Advanced Resources")
     def checks_advanced_resources(self):
         self.click(self.checkbox_advanced_resources)
@@ -124,6 +142,17 @@ class SectionGeneral(PageBase):
     @allure.step("Checking options in CheckBox -> Replace All Instances")
     def checks_replace_all_instances(self):
         self.click(self.checkbox_replace_all_instances)
+
+    # Displayed items in container 'Folder'
+    @allure.step("Verifying length from the container has contain directories")
+    def verifying_if_the_container_has_been_filled(self):
+        return len(self.container_directory)
+
+    @allure.step("Verifying text from the container has contain directories")
+    def verifying_if_the_container_values_inside(self):
+        return self.wait.until(expected_conditions.visibility_of_element_located(self.container_directory_folder)).text
+
+
 
     # Texts !
     @allure.step("Verifying all apps count")
@@ -137,6 +166,18 @@ class SectionGeneral(PageBase):
     @allure.step("Verifying all disabled apps count")
     def verifying_all_disabled_apps(self):
         return self.text(self.count_disabled_apps)
+
+    @allure.step("Verifying message returned after click in buttom to save all settings")
+    def verifying_message_returned(self):
+        return self.text(self.message_success)
+    @allure.step("Verifying if the name of instance on modal")
+    def verifying_instance_name_on_modal(self):
+        return self.text(self.modal_instances_name)
+
+    # Displayed !
+    @allure.step("Verifying if the modal has been present on screen")
+    def displayed_modal_on_screen(self):
+        return self.displayed(self.modal_instances)
 
     # Attributes !
     @allure.step("Verifying if the URL field has been enabled")

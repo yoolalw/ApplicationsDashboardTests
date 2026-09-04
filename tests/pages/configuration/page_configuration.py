@@ -2,6 +2,7 @@ import allure
 import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
 from tests.conftest import driver
@@ -28,8 +29,13 @@ class PageConfiguration(PageBase):
         self.section_style = SectionStyle(driver)
         self.section_section_advanced_resources = SectionAdvancedResources(driver)
 
+    # Displayed !
 
-    # Click !
+    @allure.step("Verifying if the element are displayed -> Bar Button Advanced Features")
+    def verifying_if_the_element_bar_advanced_features_are_displayed(self):
+        return self.wait.until(expected_conditions.invisibility_of_element(self.bar_button_advanced_resources))
+
+    # Click !V
     @allure.step("Click in button on bar to show enabled apps")
     def click_in_bar_button_show_enabled_apps(self):
         self.click(self.click_in_bar_button_show_enabled_apps)

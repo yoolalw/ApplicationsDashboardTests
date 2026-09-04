@@ -12,8 +12,10 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 
 from tests.conftest import driver
+from tests.pages.configuration.page_base import PageBase
 
-class PageHome:
+
+class PageHome(PageBase):
     def __init__(self, driver: WebDriver):
         #start
         self.driver = driver
@@ -74,6 +76,12 @@ class PageHome:
         self.sidebar_configurations_button = (By.XPATH, '//*[@id="root"]/div/main/aside/div[2]/button[1]')
         self.sidebar_about_button = (By.XPATH, '//*[@id="root"]/div/main/aside/div[2]/button[2]')
 
+
+
+    #displayed buttons
+    @allure.step("Verifying if the element are displayed -> Ai Chat")
+    def verifying_if_the_element_ai_chat_are_displayed(self):
+        return self.wait.until(ec.invisibility_of_element(self.sidebar_aichat_button))
 
     # sidebar clicks
     @allure.step("Click in SideBar button -> Home page")

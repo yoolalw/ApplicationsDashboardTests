@@ -1,0 +1,1 @@
+{"uuid": "a64c86bf-06af-4ff7-8928-ae28d36bd8db", "children": ["0cf42c18-0630-46de-8041-ce9d9ffd1f0e"], "befores": [{"name": "_django_isolate_apps", "status": "passed", "start": 1788523275826, "stop": 1788523275826}], "afters": [{"name": "_django_isolate_apps::0", "status": "passed", "start": 1788523284588, "stop": 1788523284588}], "start": 1788523275826, "stop": 1788523284588}

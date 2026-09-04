@@ -38,6 +38,20 @@ class SectionStyle(PageBase):
                                                            '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[4]/div/button')
         self.simulator_circle = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/aside/section/div[2]/div[3]/span[2]')
 
+        self.input_field_custom_color = (By.XPATH, '//*[@id="root"]/div/main/section/div/div/div[3]/div/section/div/div[2]/div[3]/div/input')
+
+        self.message_success = (By.XPATH, '//span[contains(text(), "Settings saved")]')
+
+    # Input !
+    @allure.step("Inserting color Hex in input field")
+    def inserting_values_in_hex_field(self, value):
+        self.fill(self.input_field_custom_color, value)
+
+    # Displayed
+    @allure.step("Verifying if the message has been returned")
+    def verifying_message_after_save_the_settings(self):
+        return self.text(self.message_success)
+
     # Clicks !
     @allure.step("Click in button to change card view")
     def click_button_card_view(self):

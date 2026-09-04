@@ -75,7 +75,6 @@ class PageHome:
         self.sidebar_about_button = (By.XPATH, '//*[@id="root"]/div/main/aside/div[2]/button[2]')
 
 
-
     # sidebar clicks
     @allure.step("Click in SideBar button -> Home page")
     def click_in_sidebar_button_home_page(self):
@@ -98,7 +97,7 @@ class PageHome:
         self.wait.until(ec.element_to_be_clickable(self.sidebar_configurations_button)).click()
 
     @allure.step("Click in SideBar button -> About page")
-    def click_in_sidebar_button_home_page(self):
+    def click_in_sidebar_button_about_page(self):
         self.wait.until(ec.element_to_be_clickable(self.sidebar_about_button)).click()
 
     #displayed elements
@@ -243,3 +242,15 @@ class PageHome:
             container = self.driver.find_elements(*self.languages_container)
             container[i].click()
             self.driver.find_element(*self.languages_button).click()
+
+
+    @allure.step("Return the width from the container 'Ping Teste Internet'")
+    def return_width_from_ping_teste_internet(self):
+        width = self.wait.until(ec.visibility_of_element_located(self.container_ping_teste_internet))
+        print(width.size['width'])
+        return width.size['width']
+    @allure.step("Return the height from the container 'Ping Teste Internet'")
+    def return_height_from_ping_teste_internet(self):
+        height = self.wait.until(ec.visibility_of_element_located(self.container_ping_teste_internet))
+        print(height.size['height'])
+        return height.size['height']

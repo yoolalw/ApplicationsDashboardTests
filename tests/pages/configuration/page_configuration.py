@@ -43,7 +43,7 @@ class PageConfiguration(PageBase):
         self.click(self.bar_button_general)
 
     @allure.step("Click in button on bar to show style options")
-    def click_in_bar_button_style(self):
+    def click_in_bar_button_style(self) -> None:
         self.click(self.bar_button_style)
 
     @allure.step("Click in button on bar to show advanced resources")

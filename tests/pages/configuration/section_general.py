@@ -1,6 +1,7 @@
 import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.support import expected_conditions
 
 from tests.pages.configuration.page_base import PageBase
 
@@ -58,7 +59,7 @@ class SectionGeneral(PageBase):
                                     '//*[@id="root"]/div/main/section/div/div/div[3]/div/aside/section[1]/div[2]/div[3]/p[2]')
 
     # Clicks !
-    @allure.step("Click in button to include internao server")
+    @allure.step("Click in button to include internal server")
     def click_button_internal_server(self):
         self.click(self.button_internal_server)
 
@@ -111,7 +112,6 @@ class SectionGeneral(PageBase):
     def inserting_new_directory(self, value):
         self.fill(self.input_directory, value)
 
-
     # CheckBox !
     @allure.step("Checking options in CheckBox -> Advanced Resources")
     def checks_advanced_resources(self):
@@ -137,3 +137,8 @@ class SectionGeneral(PageBase):
     @allure.step("Verifying all disabled apps count")
     def verifying_all_disabled_apps(self):
         return self.text(self.count_disabled_apps)
+
+    # Attributes !
+    @allure.step("Verifying if the URL field has been enabled")
+    def verifying_if_the_url_field_has_been_enabled(self):
+        return self.wait.until(expected_conditions.visibility_of_element_located(self.input_customized_homepage_url)).is_enabled()

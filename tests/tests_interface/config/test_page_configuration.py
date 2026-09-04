@@ -1,6 +1,7 @@
 from time import sleep
 
 import allure
+import pyautogui
 import pytest
 from allure_commons.types import Severity
 from selenium.webdriver.common.devtools.v143.audits import disable
@@ -15,6 +16,64 @@ from tests.pages.page_home import PageHome
 
 @allure.parent_suite("Web Tests -> Applications Dashboard")
 @allure.suite("Interface Tests in Configuration Page")
+@allure.epic("Tests in Section General System!")
+@pytest.mark.usefixtures("driver")
+class TestsPageConfigurationSectionGeneral:
+    driver: WebDriver
+    wait: WebDriverWait
+
+    def setup_method(self):
+        self.driver.get('http://127.0.0.1:3000/')
+        self.page_home = PageHome(self.driver)
+        self.page_home.click_in_sidebar_button_configurations_page()
+        self.configuration = PageConfiguration(self.driver)
+        self.configuration.click_in_bar_button_general()
+
+        # Tests -> General Section !
+    pyautogui.PAUSE = 0.5
+
+    @allure.id("CG01")
+    @allure.title("Click to open the 'Internal Server' and verifying if the 'HomePage Url' has been disabled")
+    def test_click_to_open_the_internal_server_and_verifying_if_the_url_field_has_been_disabled(self):
+        self.configuration.section_general.click_button_internal_server()
+        assert not self.configuration.section_general.verifying_if_the_url_field_has_been_enabled()
+
+    @allure.id("CG02")
+    @allure.title("Click to 'Upload Page' button and send one file with contains type HTML")
+    def test_send_file_in_upload_button(self):
+        window_actual = self.driver.current_window_handle
+
+        self.configuration.section_general.click_button_internal_server()
+        self.configuration.section_general.click_button_button_send_page_archive()
+        while "Abrir" not in pyautogui.getActiveWindowTitle():
+            pass
+        pyautogui.write(r"C:\Users\WSC-Convidado\Downloads\Teste Funcional - FASE 1 (2).html")
+        pyautogui.press("enter")
+        self.page_home.click_in_sidebar_button_configurations_page()
+        self.configuration.click_in_bar_button_general()
+        self.configuration.section_general.click_button_internal_server()
+        self.configuration.section_general.click_button_to_preview_with_archive_customized()
+        self.wait.until(expected_conditions.new_window_is_opened([window_actual]))
+        for window in self.driver.window_handles:
+            if window != window_actual:
+                self.driver.switch_to.window(window)
+                break
+        assert self.wait.until(expected_conditions.url_contains('/internal-homepage'))
+    # Passed
+
+
+    # Failed
+
+    # @allure.id("CG03")
+    # @allure.title("Click in 'Custom URL' and verigying ")
+    #
+
+
+# ------------------------------------------------------------------------------------------
+
+@allure.parent_suite("Web Tests -> Applications Dashboard")
+@allure.suite("Interface Tests in Configuration Page")
+@allure.epic("Tests in Section Style System!")
 @pytest.mark.usefixtures("driver")
 class TestsPageConfigurationSectionStyle:
     driver: WebDriver
@@ -28,6 +87,7 @@ class TestsPageConfigurationSectionStyle:
         self.configuration.click_in_bar_button_style()
 
         # Tests -> Style Section !
+
     @allure.id("CS01")
     @allure.title("Click button to change the format of the card and verifying if has been changed (To Card Format)")
     def test_change_card_format_to_card(self):
@@ -54,6 +114,7 @@ class TestsPageConfigurationSectionStyle:
         self.configuration.section_style.click_button_color_blue_ocean()
         assert '37, 99, 235' in self.configuration.section_style.return_the_color_from_circle()
         self.configuration.section_style.click_button_to_save_configurations()
+
     # Passed
 
     @allure.id("CS04")
@@ -62,6 +123,7 @@ class TestsPageConfigurationSectionStyle:
         self.configuration.section_style.click_button_color_green()
         assert '22, 163, 74' in self.configuration.section_style.return_the_color_from_circle()
         self.configuration.section_style.click_button_to_save_configurations()
+
     # Failed -> Wrong RGB
     # Passed
 
@@ -71,6 +133,7 @@ class TestsPageConfigurationSectionStyle:
         self.configuration.section_style.click_button_color_red_alert()
         assert '220, 38, 38' in self.configuration.section_style.return_the_color_from_circle()
         self.configuration.section_style.click_button_to_save_configurations()
+
     # Passed
 
     @allure.id("CS06")
@@ -79,6 +142,7 @@ class TestsPageConfigurationSectionStyle:
         self.configuration.section_style.click_button_color_purple_signal()
         assert '147, 51, 234' in self.configuration.section_style.return_the_color_from_circle()
         self.configuration.section_style.click_button_to_save_configurations()
+
     # Passed
 
     @allure.id("CS07")
@@ -87,6 +151,7 @@ class TestsPageConfigurationSectionStyle:
         self.configuration.section_style.click_button_color_orange_energy()
         assert '249, 115, 22' in self.configuration.section_style.return_the_color_from_circle()
         self.configuration.section_style.click_button_to_save_configurations()
+
     # Passed
 
     @allure.id("CS08")
@@ -95,6 +160,7 @@ class TestsPageConfigurationSectionStyle:
         self.configuration.section_style.click_button_color_blue_standard()
         assert '0, 157, 234' in self.configuration.section_style.return_the_color_from_circle()
         self.configuration.section_style.click_button_to_save_configurations()
+
     # Passed
 
     @allure.id("CS09")
@@ -103,6 +169,7 @@ class TestsPageConfigurationSectionStyle:
         self.configuration.section_style.click_button_color_white_clean()
         assert '255, 255, 255' in self.configuration.section_style.return_the_color_from_circle()
         self.configuration.section_style.click_button_to_save_configurations()
+
     # Failed -> Fixed: Function wrong being called (Click in Purple -> Click in White)
     # Passed
 
@@ -113,6 +180,7 @@ class TestsPageConfigurationSectionStyle:
         self.configuration.section_style.inserting_values_in_hex_field("#03fcf8")
         assert '3, 252, 248' in self.configuration.section_style.return_the_color_from_circle()
         self.configuration.section_style.click_button_to_save_configurations()
+
     # Passed
 
     @allure.id("CS11")
